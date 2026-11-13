@@ -3,49 +3,44 @@ import { ref, computed } from 'vue'
 
 const currentFilter = ref('all')
 
-// Заглушки проектов (потом заменишь на свои реальные ссылки и скриншоты)
-const projects = ref([
+const services = ref([
   {
     id: 1,
-    title: 'Корпоративный сайт студии',
+    title: 'Продающий лендинг под ключ',
     category: 'landing',
     categoryLabel: 'Лендинг',
-    description: 'Адаптивная вёрстка с анимациями, формой заявки и высокой скоростью загрузки.',
-    tech: ['Vue 3', 'Tailwind v4', 'Vite'],
-    url: '#'
+    description: 'Одностраничный сайт для товара, услуги или мероприятия с адаптацией под телефоны, высокой скоростью загрузки и формой заявки.',
+    tech: ['Vue 3', 'Tailwind CSS', 'Адаптивность']
   },
   {
     id: 2,
-    title: 'Интернет-магазин аксессуаров',
+    title: 'Интерактивное веб-приложение',
     category: 'spa',
     categoryLabel: 'Веб-приложение',
-    description: 'Каталог товаров с фильтрацией, корзиной на LocalStorage и тёмной темой.',
-    tech: ['Vue 3', 'VueUse', 'Pinia'],
-    url: '#'
+    description: 'Современный сайт с динамической фильтрацией, калькулятором стоимости, тёмной темой и плавными анимациями без перезагрузки страниц.',
+    tech: ['Vue 3', 'JavaScript', 'Vite']
   },
   {
     id: 3,
-    title: 'Промо-страница курса',
+    title: 'Сайт-визитка или портфолио',
     category: 'landing',
     categoryLabel: 'Лендинг',
-    description: 'Продающая посадочная страница с интерактивным калькулятором и таймером.',
-    tech: ['HTML5', 'Tailwind CSS', 'JS'],
-    url: '#'
+    description: 'Упаковка личного бренда специалиста или небольшой студии: галерея работ, ответы на частые вопросы и быстрая связь с клиентом.',
+    tech: ['HTML5', 'Tailwind CSS', 'SEO-база']
   },
   {
     id: 4,
-    title: 'Дашборд аналитики',
+    title: 'Адаптивная вёрстка по макету',
     category: 'spa',
     categoryLabel: 'Веб-приложение',
-    description: 'Личный кабинет пользователя с загрузкой данных по API и графиками.',
-    tech: ['Vue 3', 'REST API', 'Tailwind'],
-    url: '#'
+    description: 'Аккуратный перенос вашего дизайна из Figma в чистый, современный код с корректным отображением на любых мониторах и смартфонах.',
+    tech: ['Figma', 'Tailwind CSS', 'Чистый код']
   }
 ])
 
-const filteredProjects = computed(() => {
-  if (currentFilter.value === 'all') return projects.value
-  return projects.value.filter(project => project.category === currentFilter.value)
+const filteredServices = computed(() => {
+  if (currentFilter.value === 'all') return services.value
+  return services.value.filter(item => item.category === currentFilter.value)
 })
 </script>
 
@@ -56,7 +51,7 @@ const filteredProjects = computed(() => {
         Разработка сайтов
       </h2>
       <p class="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
-        Примеры вёрстки и одностраничных приложений, собранных с упором на чистый код и адаптивность.
+        Форматы сайтов и веб-интерфейсов, которые я создаю с упором на чистый код, скорость работы и удобство на телефонах.
       </p>
     </div>
 
@@ -67,7 +62,7 @@ const filteredProjects = computed(() => {
         :class="currentFilter === 'all' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'bg-zinc-200/70 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700'"
         class="px-5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer"
       >
-        Все работы
+        Все форматы
       </button>
       <button 
         @click="currentFilter = 'landing'"
@@ -85,40 +80,38 @@ const filteredProjects = computed(() => {
       </button>
     </div>
 
-    <!-- Сетка проектов -->
+    <!-- Сетка услуг -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <article 
-        v-for="project in filteredProjects" 
-        :key="project.id"
+        v-for="service in filteredServices" 
+        :key="service.id"
         class="group p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 transition-all flex flex-col justify-between shadow-xs"
       >
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
             <span class="text-xs font-semibold px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
-              {{ project.categoryLabel }}
+              {{ service.categoryLabel }}
             </span>
             <a 
-              :href="project.url" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              href="#contacts" 
               class="text-sm font-medium text-zinc-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              Открыть ↗
+              Заказать ↓
             </a>
           </div>
 
           <h3 class="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-            {{ project.title }}
+            {{ service.title }}
           </h3>
           <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
-            {{ project.description }}
+            {{ service.description }}
           </p>
         </div>
 
         <!-- Теги технологий -->
         <div class="flex flex-wrap gap-2 pt-4 border-t border-zinc-100 dark:border-zinc-800/80">
           <span 
-            v-for="tag in project.tech" 
+            v-for="tag in service.tech" 
             :key="tag"
             class="text-xs font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/80 px-2.5 py-1 rounded-md"
           >
